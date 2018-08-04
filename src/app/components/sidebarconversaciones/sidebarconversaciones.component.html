@@ -1,0 +1,44 @@
+<!-- aquí vive el menú donde se encuentran las opciones de online y offline -->
+<header class="row">
+  <div class="col-3" ngbDropdown>
+    <span ngbDropdownToggle>
+      <i class="fa fa-cog"></i>
+    </span>
+    <div ngbDropdownMenu>
+      <span class="dropdown-item">Settings</span>
+      <span class="dropdown-item">Offline</span>
+      <span class="dropdown-item">Online</span>
+    </div>
+  </div>
+  <div class="col-6">
+    <h1 class="messFont">
+      <span id="badge" class="rounded-circle online">
+      </span>Messenger
+    </h1>
+  </div>
+  <div class="col-3">
+    <p class="PE3 float-right">
+      <i class="fa fa-edit"></i>
+    </p>
+  </div>
+</header>
+<!-- filtro de búsqueda de conversaciones -->
+<section class="row">
+  <span>
+  </span>
+  <input type="text" class="form-control" [(ngModel)]="searchText">
+  <span>
+  </span>
+</section>
+<!-- lista de conversaciones-->
+<div class="conversaciones row" *ngFor="let conversacion of getListaDeConversaciones() | filter : {id: searchText, nombre:searchText}; let i=index;"
+  (click)="goToConversation(conversacion.id)">
+  <img src="{{ conversacion.image }}" class="rounded-circle col-3 " alt="Cinque Terre">
+  <div class="col-7">
+    <h2>{{ conversacion.nombre }}</h2>
+    <p>{{ conversacion.mensaje }}</p>
+  </div>
+  <div class="col-2">
+    <p class="hora">{{ conversacion.fecha }}</p>
+  </div>
+</div>

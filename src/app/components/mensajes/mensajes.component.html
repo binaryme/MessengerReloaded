@@ -1,0 +1,15 @@
+<div class="col-md-12 text-left scrollingdiv" style="padding-top: 20px;" *ngFor="let mensaje of getListaDeMensajes()">
+  <img src="https://goo.gl/4PYK2Q" class="rounded-circle imagemessagereceived">
+  <label class="messagereceived text-left">
+    {{mensaje.mensaje}}
+  </label>
+</div>
+<div class="col-md-11" style="padding-top: 25px; margin-top: -19px;">
+  <input type="text" [(ngModel)]="mensaje" (keyup.enter)="sendMessage()" style="width: 100%; font-size: 14px; height: 30px;"
+    placeholder="Escribe un mensaje..">
+</div>
+<div class="col-md-1" style="color: gray; padding-top: 15px;">
+  <a href="#">
+    <i class="fa fa-thumbs-up fa-3x"></i>
+  </a>
+</div>
