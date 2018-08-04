@@ -1,19 +1,21 @@
-.messagesend {
+.message {
   max-width: 400px;
   border-radius: 15px;
-  background-color: rgb(32, 82, 248);
   color: white;
   padding: 3px 10px 6px 10px;
   font-size: 14px;
 }
+.sended {
+  background-color: #0084ff;
+}
 
-.messagereceived {
-  max-width: 400px;
-  border-radius: 15px;
-  background-color: rgb(235, 234, 234);
-  color: black;
-  padding: 3px 10px 6px 10px;
-  font-size: 14px;
+input {
+  border-color: white;
+  border: none;
+}
+
+input:focus {
+  outline: none;
 }
 
 .date {
@@ -26,25 +28,6 @@
   width: 25px;
   margin-bottom: -5px;
   margin-right: 10px;
-}
-
-.scrollingdiv {
-  overflow: scroll;
-  border-left: none;
-  overflow-x: hidden;
-}
-
-input {
-  border-color: white;
-  border: none;
-}
-
-input:focus {
-  outline: none;
-}
-
-span {
-  margin-left: 18px;
 }
 
 i {
