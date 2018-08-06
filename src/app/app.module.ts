@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChatsService } from './services/chats.service';
+import { ChatService } from './services/chat.service';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +17,10 @@ import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.compone
 import { MensajesinnerComponent } from './components/mensajesinner/mensajesinner.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FilterPipe } from './pipes/filter.pipe';
+// firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -33,9 +39,12 @@ import { FilterPipe } from './pipes/filter.pipe';
     NgbModule.forRoot(),
     AngularFontAwesomeModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [ChatsService],
+  providers: [ChatsService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
