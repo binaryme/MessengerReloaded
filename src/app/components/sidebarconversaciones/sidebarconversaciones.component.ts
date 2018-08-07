@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatsService } from '../../services/chats.service';
 import { RouterModule, Router } from '@angular/router';
+import { ContactosService } from '../../services/contactos/contactos.service';
 
 @Component({
   selector: 'app-sidebarconversaciones',
@@ -10,16 +11,20 @@ import { RouterModule, Router } from '@angular/router';
 export class SidebarConversacionesComponent implements OnInit {
   listaDeConversaciones: any;
   texto: string;
-  constructor(private chatservice: ChatsService, private router: Router) {}
+  constructor(private chatservice: ChatsService, private router: Router, private _contactos : ContactosService) {}
+
   ngOnInit() {}
+
   getListaDeConversaciones() {
     this.listaDeConversaciones = this.chatservice.ListaConversaciones();
     return this.listaDeConversaciones;
   }
+
   goToConversation(id: number) {
     console.log(id);
     this.router.navigate(['/inbox', id]);
   }
+  
   buscarConversaciones(texto) {
     console.log(texto);
     // this.listaDeConversaciones = this.chatservice.buscarConversacion(texto);
