@@ -2,9 +2,6 @@ import {
     Injectable
 } from '@angular/core';
 import {
-    HttpClient
-} from '@angular/common/http';
-import {
     AngularFireDatabase,
     AngularFireList
 } from '../../../../node_modules/angularfire2/database';
@@ -16,29 +13,23 @@ import {
 } from '../../models/contacto.model';
 
 const nombreLista = 'contactos';
-const httpApi = 'https://jsonplaceholder.typicode.com/posts';
+
 @Injectable({
     providedIn: 'root'
 })
 export class ContactosService {
     public listaContactos: AngularFireList < any > ;
-    constructor(private _firebase: AngularFireDatabase, private _http: HttpClient) {
+    constructor(private _firebase: AngularFireDatabase) {
         this.listaContactos = this._firebase.list(nombreLista);
     }
 
-    get() {
-        return this._http.get(httpApi);
-    }
-    post(contacto: Contacto) {
-        return this._http.post(httpApi, contacto);
-    }
-
-    getAll(...params) {
+    getAll() {
+        //valueChanges()
         return this.listaContactos.snapshotChanges().pipe(
             map(changes =>
                 changes.map(c => ({
                     key: c.payload.key,
-                    ...c.payload.val()
+                    ...c.payload.val() // SPREAD OPERATOR
                 }))
             )
         )

@@ -29,9 +29,13 @@ export class ContactoComponent implements OnInit {
     }
     getEstado() {
         this.contacto.estado = 'online';
+        setTimeout(() => {
+            this.contacto.estado = 'away';
+        }, 3000);
     }
 
     verConversacion() {
+        this.contacto.estado = 'Está dándole click';
         this.abrirConversacion.emit(this.contacto);
     }
 

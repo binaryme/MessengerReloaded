@@ -34,12 +34,6 @@ export class SidebarConversacionesComponent implements OnInit {
 
     ngOnInit() {
         this.getListaContactos();
-        // this.getPosts();
-    }
-    getPosts() {
-        this._contactos.get().subscribe((publicaciones: Array < any > ) => {
-            this.listaPublicaciones = publicaciones;
-        })
     }
     getListaContactos() {
         this._contactos.getAll().subscribe(contactos => {
@@ -51,7 +45,7 @@ export class SidebarConversacionesComponent implements OnInit {
 
     goToConversation(contacto: Contacto) {
         this.contactoSeleccionado = contacto;
-        this.router.navigate(['/inbox', contacto.key]);
+        // this.router.navigate(['/inbox', contacto.key]);
     }
 
     buscarConversaciones(texto) {

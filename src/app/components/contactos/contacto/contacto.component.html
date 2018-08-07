@@ -1,10 +1,12 @@
-<div (click)="verConversacion()">
+<div>
     <img [src]="contacto.fotografia" />
     <h2>{{contacto.nombre}}</h2>
     <a [href]="'mailto:' + contacto.correo">{{contacto.correo}}</a>
     <h5>El contacto está {{contacto.estado}}</h5>
     <hr/>
     <button (click)="eliminar()">BORRAR</button>
+    <hr/>
+    <button (click)="verConversacion()">VER CONVERSACION</button>
     <hr/>
     <form>
         <div class="input-group">

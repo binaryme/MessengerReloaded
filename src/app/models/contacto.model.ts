@@ -3,11 +3,12 @@ export interface Contacto {
     nombre: string;
     fotografia: string;
     correo: string;
-    ultimoMensaje: {
-        mensaje: string;
-        fecha: number
-    };
+    mensajes: Array<Mensaje>;
     estado ? : string;
+}
+
+export interface Mensaje {
+    texto: string;
 }
 export class Contacto {
     constructor() {}
