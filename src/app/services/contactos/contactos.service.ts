@@ -9,6 +9,9 @@ import {
     AngularFireList
 } from '../../../../node_modules/angularfire2/database';
 import {
+    map
+} from 'rxjs/operators';
+import {
     Contacto
 } from '../../models/contacto.model';
 
@@ -30,17 +33,26 @@ export class ContactosService {
         return this._http.post(httpApi, contacto);
     }
 
-    getAll() {
-        return this.listaContactos.valueChanges();
+    getAll(...params) {
+        return this.listaContactos.snapshotChanges().pipe(
+            map(changes =>
+                changes.map(c => ({
+                    key: c.payload.key,
+                    ...c.payload.val()
+                }))
+            )
+        )
     }
     addNew(contacto: Contacto) {
         return this.listaContactos.push(contacto);
     }
     edit(contacto, actualizacion) {
-        return this.listaContactos.update(contacto, actualizacion);
+        //this.listaContactos.set(contacto.key, actualizacion)
+        return this.listaContactos.update(contacto.key, actualizacion);
     }
     remove(contacto) {
-        return this.listaContactos.remove(contacto);
+        // realizar un envío a otro servicio
+        return this.listaContactos.remove(contacto.key);
     }
 
 }

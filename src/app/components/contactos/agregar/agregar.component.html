@@ -1,0 +1,11 @@
+<form>
+    <div class="input-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" name="nombre" [(ngModel)]="nuevo.nombre" />
+    </div>
+    <div class="input-group">
+        <label>Correo</label>
+        <input type="email" class="form-control" name="correo" [(ngModel)]="nuevo.correo" />
+    </div>
+    <button (click)="guardar()">Guardar</button>
+</form>

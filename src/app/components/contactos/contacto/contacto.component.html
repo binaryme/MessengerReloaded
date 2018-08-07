@@ -1,0 +1,16 @@
+<div (click)="verConversacion()">
+    <img [src]="contacto.fotografia" />
+    <h2>{{contacto.nombre}}</h2>
+    <a [href]="'mailto:' + contacto.correo">{{contacto.correo}}</a>
+    <h5>El contacto está {{contacto.estado}}</h5>
+    <hr/>
+    <button (click)="eliminar()">BORRAR</button>
+    <hr/>
+    <form>
+        <div class="input-group">
+            <label>Nombre</label>
+            <input type="text" name="nombre" [(ngModel)]="editar.nombre">
+        </div>
+        <button (click)="edit()">EDITAR</button>
+    </form>
+</div>

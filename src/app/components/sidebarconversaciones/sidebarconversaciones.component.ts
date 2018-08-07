@@ -1,32 +1,61 @@
-import { Component, OnInit } from '@angular/core';
-import { ChatsService } from '../../services/chats.service';
-import { RouterModule, Router } from '@angular/router';
-import { ContactosService } from '../../services/contactos/contactos.service';
+import {
+    Component,
+    OnInit
+} from '@angular/core';
+import {
+    ChatsService
+} from '../../services/chats.service';
+import {
+    RouterModule,
+    Router
+} from '@angular/router';
+import {
+    ContactosService
+} from '../../services/contactos/contactos.service';
+import {
+    Contacto
+} from '../../models/contacto.model';
 
 @Component({
-  selector: 'app-sidebarconversaciones',
-  templateUrl: './sidebarconversaciones.component.html',
-  styleUrls: ['./sidebarconversaciones.component.scss']
+    selector: 'app-sidebarconversaciones',
+    templateUrl: './sidebarconversaciones.component.html',
+    styleUrls: ['./sidebarconversaciones.component.scss']
 })
 export class SidebarConversacionesComponent implements OnInit {
-  listaDeConversaciones: any;
-  texto: string;
-  constructor(private chatservice: ChatsService, private router: Router, private _contactos : ContactosService) {}
+    listaContactos: any;
+    listaPublicaciones: Array < any > ;
+    texto: string;
+    contactoSeleccionado: Contacto;
+    constructor(
+        private chatservice: ChatsService,
+        private router: Router,
+        private _contactos: ContactosService
+    ) {}
 
-  ngOnInit() {}
+    ngOnInit() {
+        this.getListaContactos();
+        // this.getPosts();
+    }
+    getPosts() {
+        this._contactos.get().subscribe((publicaciones: Array < any > ) => {
+            this.listaPublicaciones = publicaciones;
+        })
+    }
+    getListaContactos() {
+        this._contactos.getAll().subscribe(contactos => {
+            this.listaContactos = contactos;
+        });
+        // this.listaDeConversaciones = this.chatservice.ListaConversaciones();
+        // return this.listaDeConversaciones;
+    }
 
-  getListaDeConversaciones() {
-    this.listaDeConversaciones = this.chatservice.ListaConversaciones();
-    return this.listaDeConversaciones;
-  }
+    goToConversation(contacto: Contacto) {
+        this.contactoSeleccionado = contacto;
+        this.router.navigate(['/inbox', contacto.key]);
+    }
 
-  goToConversation(id: number) {
-    console.log(id);
-    this.router.navigate(['/inbox', id]);
-  }
-  
-  buscarConversaciones(texto) {
-    console.log(texto);
-    // this.listaDeConversaciones = this.chatservice.buscarConversacion(texto);
-  }
+    buscarConversaciones(texto) {
+        console.log(texto);
+        // this.listaDeConversaciones = this.chatservice.buscarConversacion(texto);
+    }
 }
