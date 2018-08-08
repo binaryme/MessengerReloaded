@@ -11,16 +11,27 @@ import {
 import {
     Contacto
 } from '../../models/contacto.model';
+import {
+    EventListener
+} from '../../../../node_modules/@angular/core/src/debug/debug_node';
+import {
+    AuthService
+} from '../auth/auth.service';
 
-const nombreLista = 'contactos';
+// const nombreLista = 'contactos';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ContactosService {
     public listaContactos: AngularFireList < any > ;
-    constructor(private _firebase: AngularFireDatabase) {
-        this.listaContactos = this._firebase.list(nombreLista);
+
+    constructor(private _firebase: AngularFireDatabase, private _auth: AuthService) {
+        this._auth.usuario.subscribe(usuario => {
+            if (usuario) {
+                this.listaContactos = this._firebase.list(`${usuario.uid}/contactos`);
+            }
+        });
     }
 
     getAll() {

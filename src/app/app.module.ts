@@ -64,6 +64,9 @@ import {
     AngularFireDatabaseModule
 } from 'angularfire2/database';
 import {
+    AngularFireAuthModule
+} from 'angularfire2/auth';
+import {
     environment
 } from '../environments/environment';
 import {
@@ -100,6 +103,7 @@ import {
         HttpModule,
         HttpClientModule,
         AngularFireDatabaseModule,
+        AngularFireAuthModule,
         AngularFireModule.initializeApp(environment.firebase)
     ],
     providers: [ChatsService, ChatService],

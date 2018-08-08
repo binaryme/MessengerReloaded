@@ -1,6 +1,9 @@
 import {
     Component,
-    OnInit
+    OnInit,
+    Output,
+    EventEmitter,
+    Input
 } from '@angular/core';
 import {
     ChatsService
@@ -15,6 +18,10 @@ import {
 import {
     Contacto
 } from '../../models/contacto.model';
+import {
+    AuthService
+} from '../../services/auth/auth.service';
+import { UsuarioService } from '../../services/usuario/usuario.service';
 
 @Component({
     selector: 'app-sidebarconversaciones',
@@ -22,6 +29,8 @@ import {
     styleUrls: ['./sidebarconversaciones.component.scss']
 })
 export class SidebarConversacionesComponent implements OnInit {
+    @Input('usuario') usuario;
+    @Output('mandaContacto') mandaContacto: EventEmitter < Contacto > = new EventEmitter();
     listaContactos: any;
     listaPublicaciones: Array < any > ;
     texto: string;
@@ -29,7 +38,9 @@ export class SidebarConversacionesComponent implements OnInit {
     constructor(
         private chatservice: ChatsService,
         private router: Router,
-        private _contactos: ContactosService
+        private _contactos: ContactosService,
+        private _auth: AuthService,
+        private _usuarioService : UsuarioService
     ) {}
 
     ngOnInit() {
@@ -45,7 +56,12 @@ export class SidebarConversacionesComponent implements OnInit {
 
     goToConversation(contacto: Contacto) {
         this.contactoSeleccionado = contacto;
+        this.mandaContacto.emit(contacto);
         // this.router.navigate(['/inbox', contacto.key]);
+    }
+
+    cerrarSesion() {
+        this._auth.cerrarSesion();
     }
 
     buscarConversaciones(texto) {

@@ -8,12 +8,15 @@
             <span class="dropdown-item">Settings</span>
             <span class="dropdown-item">Offline</span>
             <span class="dropdown-item">Online</span>
+            <span class="dropdown-item" (click)="cerrarSesion()">Cerrar sesión</span>
         </div>
     </div>
     <div class="col-6">
         <h1 class="messFont">
             <span id="badge" class="rounded-circle online">
       </span>Messenger
+            <br/>
+            <small>{{usuario.email}}</small>
         </h1>
     </div>
     <div class="col-3">
@@ -43,10 +46,9 @@
 <!-- <div class="conversaciones row" *ngFor="let contacto of listaContactos | filter : {id: searchText, nombre:searchText}; let i=index;"
   (click)="goToConversation(conversacion.id)"> -->
 <!-- <app-contacto-mensajes *ngIf="contactoSeleccionado" [contacto]="contactoSeleccionado"></app-contacto-mensajes> -->
-<app-contacto-mensajes *ngIf="contactoSeleccionado" [contacto]="contactoSeleccionado"></app-contacto-mensajes>
-<hr/>
+<!-- <app-contacto-mensajes *ngIf="contactoSeleccionado" [contacto]="contactoSeleccionado"></app-contacto-mensajes> -->
 <div class="conversaciones row" *ngFor="let contacto of listaContactos | filter : {id: searchText, nombre:searchText}; let i=index;">
-    <app-contacto [contacto]="contacto" (abrirConversacion)="goToConversation($event)"></app-contacto>
+    <app-contacto [contacto]="contacto" (abrirConversacion)="goToConversation($event)" [ngClass]="{'activo': contacto === contactoSeleccionado}"></app-contacto>
 </div>
 <hr/>
 <app-contacto-agregar>

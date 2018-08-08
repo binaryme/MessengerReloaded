@@ -1,20 +1,28 @@
+<h2>{{contactoSeleccionado.mensajes | json}}</h2>
 <div class="row">
-  <div class="col-md-12 text-left scrollingdiv" style="padding-top: 20px;" *ngFor="let mensaje of getListaDeMensajes()">
-    <img src="https://goo.gl/4PYK2Q" class="rounded-circle imagemessagereceived">
-    <label class="message sended text-left">
+    <!-- <div class="col-md-12 text-left scrollingdiv" style="padding-top: 20px;" *ngFor="let mensaje of getListaDeMensajes()">
+        <img src="https://goo.gl/4PYK2Q" class="rounded-circle imagemessagereceived">
+        <label class="message sended text-left">
       {{mensaje.mensaje}}
     </label>
-  </div>
+    </div> -->
+
+
+    <div class="col-md-12 text-left scrollingdiv" style="padding-top: 20px;" *ngFor="let mensaje of contactoSeleccionado.mensajes">
+        <img src="https://goo.gl/4PYK2Q" class="rounded-circle imagemessagereceived">
+        <label class="message sended text-left">
+      {{mensaje | json}}
+    </label>
+    </div>
 </div>
 <br>
 <div class="row">
-  <div class="col-md-11">
-    <input type="text" [(ngModel)]="mensaje" (keyup.enter)="sendMessage()" style="width: 100%; font-size: 14px; height: 30px;"
-      placeholder="Escribe un mensaje..">
-  </div>
-  <div class="col-md-1">
-    <a href="#">
+    <div class="col-md-11">
+        <input type="text" [(ngModel)]="mensaje" (keyup.enter)="sendMessage()" style="width: 100%; font-size: 14px; height: 30px;" placeholder="Escribe un mensaje..">
+    </div>
+    <div class="col-md-1">
+        <a href="#">
       <i class="fa fa-thumbs-up fa-3x"></i>
     </a>
-  </div>
+    </div>
 </div>

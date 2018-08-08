@@ -10,6 +10,7 @@ export interface Contacto {
 export interface Mensaje {
     texto: string;
 }
+
 export class Contacto {
     constructor() {}
 }
