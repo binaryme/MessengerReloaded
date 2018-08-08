@@ -21,7 +21,9 @@ import {
 import {
     AuthService
 } from '../../services/auth/auth.service';
-import { UsuarioService } from '../../services/usuario/usuario.service';
+import {
+    UsuarioService
+} from '../../services/usuario/usuario.service';
 
 @Component({
     selector: 'app-sidebarconversaciones',
@@ -40,11 +42,15 @@ export class SidebarConversacionesComponent implements OnInit {
         private router: Router,
         private _contactos: ContactosService,
         private _auth: AuthService,
-        private _usuarioService : UsuarioService
+        private _usuarioService: UsuarioService
     ) {}
 
     ngOnInit() {
-        this.getListaContactos();
+        this._auth.usuario.subscribe(usuario => {
+            if (usuario) {
+                this.getListaContactos();
+            }
+        })
     }
     getListaContactos() {
         this._contactos.getAll().subscribe(contactos => {

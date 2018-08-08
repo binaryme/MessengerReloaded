@@ -6,7 +6,12 @@ import {
     AngularFireList
 } from '../../../../node_modules/angularfire2/database';
 import {
-    map
+    Observable,
+    of
+} from 'rxjs';
+import {
+    map,
+    catchError
 } from 'rxjs/operators';
 import {
     Contacto
@@ -35,15 +40,17 @@ export class ContactosService {
     }
 
     getAll() {
-        //valueChanges()
         return this.listaContactos.snapshotChanges().pipe(
             map(changes =>
                 changes.map(c => ({
                     key: c.payload.key,
                     ...c.payload.val() // SPREAD OPERATOR
                 }))
-            )
-        )
+            ),
+            catchError((err) => {
+                return of(false);
+            })
+        );
     }
     addNew(contacto: Contacto) {
         return this.listaContactos.push(contacto);
